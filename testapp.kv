@@ -1,0 +1,43 @@
+#;kivy 1.10.1
+
+<BaseWidget>:
+
+    GridLayout:
+        rows: 1
+        cols: 2
+        padding: 10
+        width: root.width
+        height: root.height * 0.15
+        center_y: root.height - self.height /2
+        Label:
+            text : "URL"
+            size_hint_x: 0.2
+        TextInput:
+            text: "github.com"
+            multiline: False
+
+    GridLayout:
+        rows: 2
+        cols: 4
+        width: root.width
+        height: root.height * 0.15
+        center_y: root.height - self.height * 1.5
+        padding: 10
+        spacing: 5
+        Button:
+            text : "GET"
+            size_hint_x: 0.2
+        Button:
+            text: "POST"
+            size_hint_x: 0.2
+
+    GridLayout:
+        rows: 1
+        cols: 1
+        padding: 10
+        width: root.width
+        height: root.height * 0.7
+        center_y: root.height - root.height / 1.53
+        TextInput:
+            text: "github.com"
+            multiline: False
