@@ -1,0 +1,56 @@
+#;kivy 1.10.1
+
+<MainWidget>:
+    player1: player1_paddle
+    player2: player2_paddle
+    ball: ellipse_ball
+    player1_board: player1_label
+    player2_board: player2_label
+
+    canvas:
+        Rectangle:
+            pos: self.center_x - 5, 0
+            size: 5, root.height
+    Label:
+        id: player1_label
+        text: ""
+        top: root.height/2 + 60
+        center_x: root.width * 0.3
+        font_size: 60
+
+    Label:
+        id: player2_label
+        text: ""
+        top: root.height/2 + 60
+        center_x: root.width * 0.7
+        font_size: 60
+
+    Players:
+        id: player2_paddle
+        top: root.height / 2 + 50
+        center_x: root.width - 50
+
+    Players:
+        id: player1_paddle
+        top: root.height / 2 + 50
+        center_x: 50
+
+    PongBall:
+        id: ellipse_ball
+        center: self.parent.center
+
+
+<Players>:
+    size: 10,50
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size:self.size
+
+
+<PongBall>:
+    size: 50,50
+    canvas:
+        Ellipse:
+            pos: self.pos
+            size: self.size
