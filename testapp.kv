@@ -1,6 +1,8 @@
 #;kivy 1.10.1
 
 <BaseWidget>:
+    input_url: input_url
+    output_box: output_text
 
     GridLayout:
         rows: 1
@@ -13,6 +15,7 @@
             text : "URL"
             size_hint_x: 0.2
         TextInput:
+            id: input_url
             text: "github.com"
             multiline: False
 
@@ -25,11 +28,31 @@
         padding: 10
         spacing: 5
         Button:
+            id: button_get
             text : "GET"
             size_hint_x: 0.2
+            on_release: root.perform_http_request(self.text)
         Button:
+            id: button_post
             text: "POST"
             size_hint_x: 0.2
+            on_release: root.perform_http_request(self.text)
+        Button:
+            id: button_post
+            text: "PUT"
+            size_hint_x: 0.2
+            on_release: root.perform_http_request(self.text)
+        Button:
+            id: button_post
+            text: "PATCH"
+            size_hint_x: 0.2
+            on_release: root.perform_http_request(self.text)
+        Button:
+            id: button_post
+            text: "DELETE"
+            size_hint_x: 0.2
+            on_release: root.perform_http_request(self.text)
+
 
     GridLayout:
         rows: 1
@@ -39,5 +62,6 @@
         height: root.height * 0.7
         center_y: root.height - root.height / 1.53
         TextInput:
-            text: "github.com"
-            multiline: False
+            id: output_text
+            text: ""
+            multiline: True

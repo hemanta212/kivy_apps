@@ -1,0 +1,13 @@
+venv
+.venv
+.vscode
+.idea
+.pyc
+*swp
+*swo*
+.orig
+dist
+build
+*egg*
+__pycache__
+
