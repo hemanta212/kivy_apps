@@ -1,0 +1,20 @@
+
+BoxLayout:
+    orientation: 'vertical'
+    MDToolbar:
+        title: "WhatsApp"
+        right_action_items: [ ['magnify', lambda x: print("magnify")], ['message-reply-text', lambda x: print('chat')], ['dots-vertical', lambda x: print('dots-vertical')] ]
+    MDTabs:
+        id: android_tabs
+        on_tab_switch: app.on_tab_switch(*args)
+        Tab:
+            text: "CALLS"
+        Tab:
+            text: "CHATS"
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                MDList:
+                    id: list
+        Tab:
+            text: "CONTACTS"
