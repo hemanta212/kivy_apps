@@ -8,6 +8,12 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.7"
 requests = "^2.22.0"
+kivy = "^1.11.1"
+pillow = "^7.1.1"
+"kivy_deps.sdl2" = "^0.2.0"
+"kivy_deps.glew" = "^0.2.0"
+docutils = "^0.16"
+pygments = "^2.6.1"
 
 [tool.poetry.dev-dependencies]
 
