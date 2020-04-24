@@ -1,0 +1,3 @@
+title=Pong
+author=hemanta212
+orientation=landscape

@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 from kivy.core.window import Window
 from kivymd.app import MDApp
 from kivy.uix.floatlayout import FloatLayout
@@ -13,13 +15,13 @@ class MainApp(MDApp):
         self.theme_cls.primary_hue = '700'
 
         # Add messages
-        self.new_message("ERIK SANDBERG", "Hello World", "woman.png")
-        self.new_message("ERIK Danberg", "Hello World", "woman.png")
-        self.new_message("Danny Erikberg", "Hello World", "woman.png")
-        self.new_message("KivyMD NotSandberg", "Hello World", "woman.png")
+        self.new_message("Hemanta212", "Hello World", "woman.png")
+        self.new_message("Kivy is Great", "Hello World", "woman.png")
+        self.new_message("I love Python", "Hello World", "woman.png")
+        self.new_message("KivyMD", "Hello World", "woman.png")
         self.new_message("Whats App", "Hello World", "woman.png")
         self.new_message("Me Myself", "Hello World", "woman.png")
-        self.new_message("Pewdiepie", "Hello World", "woman.png")
+        self.new_message("Pythonista", "Hello World", "woman.png")
 
     def new_message(self, name, message, image_name):
         new_message = TwoLineAvatarIconListItem(text=name, secondary_text=message)

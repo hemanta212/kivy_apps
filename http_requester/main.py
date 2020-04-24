@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 import requests
 import kivy
 kivy.require('1.10.1')
