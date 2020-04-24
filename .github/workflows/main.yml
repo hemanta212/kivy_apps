@@ -36,7 +36,7 @@ jobs:
          name: ${{ matrix.project }}_armeabi-v7a-release.apk
          path: app/rel/${{ matrix.project }}_armeabi-v7a-release.apk
 
-   release:
+  release:
     needs: setup
     runs-on: ubuntu-latest
     steps:
