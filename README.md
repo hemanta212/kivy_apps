@@ -9,7 +9,7 @@ Material Design with KivyMD: https://github.com/HeaTTheatR/KivyMD
 
 Learn KivyMD: https://www.youtube.com/playlist?list=PLy5hjmUzdc0nMkzhphsqgPCX62NFhkell
 
-<!-- ![build](https://github.com/hemanta212/kivy_apps/workflows/Build/badge.svg) -->
+![build](https://github.com/hemanta212/kivy_apps/workflows/Build/badge.svg)
 
 ## Project Installation:
 ### 1. Building yourself
@@ -40,6 +40,10 @@ $ python main.py
 ```
 
 ### 2. Try out in android!
+#### Install apks from release
+Go to the [release](https://github.com/hemanta212/kivy_apps/releases/latest) and donwload and install apks.
+
+#### Run in Kivy Launcher app
 Download the [Kivy Launcher](https://play.google.com/store/apps/details?id=org.kivy.pygame&hl=en_US) app from play store.
 Download the zip file of this project in your android and extract its contents in <internal storage>/kivy folder : [Download project zip link](https://github.com/hemanta212/kivy_apps/archive/master.zip)
 
