@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Http Requester
+title = Ping Pong Game
 
 # (str) Package name
-package.name = http_requester_kivy
+package.name = pong_kivy
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.httprequesterkivy
+package.domain = com.pongkivy
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -36,7 +36,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,requests,pillow
+requirements = python3,kivy,pillow
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -85,7 +85,7 @@ fullscreen = 0
 #android.presplash_color = #FFFFFF
 
 # (list) Permissions
-android.permissions = INTERNET
+#android.permissions = INTERNET
 
 # (int) Target Android API, should be as high as possible.
 #android.api = 27

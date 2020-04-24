@@ -1,0 +1,54 @@
+name: Build
+on:
+  push:
+
+
+jobs:
+  setup:
+   runs-on: ubuntu-latest
+
+   steps:
+     - run: |
+          sudo apt-get update
+          sudo apt install -y tree git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev
+          pip3 install --user --upgrade pip setuptools
+          pip3 install --user cython virtualenv
+          pip3 install --user --upgrade buildozer 
+
+     - uses: actions/checkout@v2
+       with:
+         path: 'app'
+
+     - run: |
+          export PATH=$PATH:~/.local/bin/
+          cd app
+          mkdir rel
+
+          cd hello_world/
+          buildozer -v android release 
+          mv bin/*.apk ../rel/hello_world_armeabi-v7a-release.apk 
+          
+          cd ../http_requester
+          buildozer -v android release 
+          mv bin/*.apk ../rel/http_requester_armeabi-v7a-release.apk 
+ 
+          cd ../pong
+          buildozer -v android release 
+          mv bin/*.apk ../rel/pong_armeabi-v7a-release.apk 
+ 
+          cd ../whatsapp_ui
+          buildozer -v android release 
+          mv bin/*.apk ../rel/whatsapp_ui_armeabi-v7a-release.apk 
+
+     - name: Release
+       uses: softprops/action-gh-release@v1
+       if: startsWith(github.ref, 'refs/tags/')
+       with:
+         files: |
+             app/rel/whatsapp_ui_armeabi-v7a-release.apk
+             app/rel/pong_armeabi-v7a-release.apk
+             app/rel/http_requester_armeabi-v7a-release.apk
+             app/rel/hello_world_armeabi-v7a-release.apk
+         body_path: app/CHANGELOG.txt
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

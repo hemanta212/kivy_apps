@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Http Requester
+title = Hello World
 
 # (str) Package name
-package.name = http_requester_kivy
+package.name = hello_world_kivy
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.httprequesterkivy
+package.domain = com.helloworldkivy
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -36,7 +36,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,requests,pillow
+requirements = python3,kivy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -52,7 +52,7 @@ requirements = python3,kivy,requests,pillow
 #icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
-orientation = all
+orientation = portrait
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
@@ -85,7 +85,7 @@ fullscreen = 0
 #android.presplash_color = #FFFFFF
 
 # (list) Permissions
-android.permissions = INTERNET
+#android.permissions = INTERNET
 
 # (int) Target Android API, should be as high as possible.
 #android.api = 27
