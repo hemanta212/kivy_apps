@@ -6,6 +6,9 @@ on:
 jobs:
   setup:
    runs-on: ubuntu-latest
+   strategy:
+     matrix:
+       project: ['hello_world', 'http_requester', 'pong', 'whatsapp_ui']
 
    steps:
      - run: |
@@ -24,31 +27,57 @@ jobs:
           cd app
           mkdir rel
 
-          cd hello_world/
+          cd ${{ matrix.project }}
           buildozer -v android release 
-          mv bin/*.apk ../rel/hello_world_armeabi-v7a-release.apk 
-          
-          cd ../http_requester
-          buildozer -v android release 
-          mv bin/*.apk ../rel/http_requester_armeabi-v7a-release.apk 
- 
-          cd ../pong
-          buildozer -v android release 
-          mv bin/*.apk ../rel/pong_armeabi-v7a-release.apk 
- 
-          cd ../whatsapp_ui
-          buildozer -v android release 
-          mv bin/*.apk ../rel/whatsapp_ui_armeabi-v7a-release.apk 
+          mv bin/*.apk ../rel/${{ matrix.project }}_armeabi-v7a-release.apk 
 
+     - uses: actions/upload-artifact@v1
+       with:
+         name: ${{ matrix.project }}_armeabi-v7a-release.apk
+         path: app/rel/${{ matrix.project }}_armeabi-v7a-release.apk
+
+   release:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v2
+       with:
+         path: 'app'
+
+     - run: |
+         cd app
+         mkdir rel/
+
+     - uses: actions/download-artifact@v1
+       with:
+         name: hello_world_armeabi-v7a-release.apk
+         path: rel/
+
+     - uses: actions/download-artifact@v1
+       with:
+         name: pong_armeabi-v7a-release.apk
+         path: rel/
+
+     - uses: actions/download-artifact@v1
+       with:
+         name: http_requester_armeabi-v7a-release.apk
+         path: rel/
+
+     - uses: actions/download-artifact@v1
+       with:
+         name: whatsapp_ui_armeabi-v7a-release.apk
+         path: rel/
+
+         
      - name: Release
        uses: softprops/action-gh-release@v1
        if: startsWith(github.ref, 'refs/tags/')
        with:
          files: |
-             app/rel/whatsapp_ui_armeabi-v7a-release.apk
-             app/rel/pong_armeabi-v7a-release.apk
-             app/rel/http_requester_armeabi-v7a-release.apk
-             app/rel/hello_world_armeabi-v7a-release.apk
+             rel/whatsapp_ui_armeabi-v7a-release.apk
+             rel/pong_armeabi-v7a-release.apk
+             rel/http_requester_armeabi-v7a-release.apk
+             rel/hello_world_armeabi-v7a-release.apk
          body_path: app/CHANGELOG.txt
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
