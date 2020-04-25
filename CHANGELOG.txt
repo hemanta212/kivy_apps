@@ -1,5 +1,8 @@
-Version 0.0.1
+Version 0.3
 
 # Kivy Apps
 
 Initial Release
+
+FIXED:
+ * Signed apks
