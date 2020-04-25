@@ -42,6 +42,7 @@ $ python main.py
 ### 2. Try out in android!
 #### Install apks from release
 Go to the [release](https://github.com/hemanta212/kivy_apps/releases/latest) and donwload and install apks.
+The apks are unsigned. You can download zipsigner app from playstore to sign these apks and install yourself.
 
 #### Run in Kivy Launcher app
 Download the [Kivy Launcher](https://play.google.com/store/apps/details?id=org.kivy.pygame&hl=en_US) app from play store.
