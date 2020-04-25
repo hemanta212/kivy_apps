@@ -92,5 +92,6 @@ jobs:
              rel/http_requester_armeabi-v7a-release.apk
              rel/hello_world_armeabi-v7a-release.apk
          body_path: app/CHANGELOG.txt
+         draft: true
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

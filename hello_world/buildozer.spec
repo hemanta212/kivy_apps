@@ -36,7 +36,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy
+requirements = python2,kivy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -52,7 +52,7 @@ requirements = python3,kivy
 #icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
-orientation = portrait
+orientation = all
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
@@ -91,7 +91,7 @@ fullscreen = 0
 #android.api = 27
 
 # (int) Minimum API your APK will support.
-android.minapi = 21
+android.minapi = 19
 
 # (int) Android SDK version to use
 #android.sdk = 20
