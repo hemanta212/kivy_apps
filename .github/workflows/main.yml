@@ -18,6 +18,14 @@ jobs:
           pip3 install --user cython virtualenv
           pip3 install --user --upgrade buildozer 
 
+     - name: Checkout Keystore repo
+       uses: actions/checkout@v2
+       with:
+         repository: hemanta212/personal
+         token: ${{ secrets.REPO_ACCESS_TOKEN }}
+         ref: "refs/tags/vkivyapp"
+         path: 'personal'
+
      - uses: actions/checkout@v2
        with:
          path: 'app'
@@ -28,6 +36,12 @@ jobs:
           mkdir rel
 
           cd ${{ matrix.project }}
+          source ../../personal/credentials/keystores/.env
+          export P4A_RELEASE_KEYSTORE=`readlink -f ../../personal/credentials/keystores/kivyapplicationkey.keystore`
+          export P4A_RELEASE_KEYSTORE_PASSWD=$KEYSTORE_PASS
+          export P4A_RELEASE_KEYALIAS_PASSWD=$KEYSTORE_PASS
+          export P4A_RELEASE_KEYALIAS=kivykey
+
           buildozer -v android release 
           mv bin/*.apk ../rel/${{ matrix.project }}_armeabi-v7a-release.apk 
 
