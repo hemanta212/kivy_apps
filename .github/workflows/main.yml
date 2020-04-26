@@ -12,12 +12,12 @@ jobs:
 
    steps:
      - run: |
-          pip install --upgrade buildozer
           sudo apt-get update
           sudo pip install --upgrade cython==0.28.6
           sudo dpkg --add-architecture i386
           sudo apt update
-          sudo apt install build-essential ccache git libncurses5:i386 libstdc++6:i386 libgtk2.0-0:i386 libpangox-1.0-0:i386 libpangoxft-1.0-0:i386 libidn11:i386 python2.7 python2.7-dev openjdk-8-jdk unzip zlib1g-dev zlib1g:i386
+          sudo apt install build-essential ccache git libncurses5:i386 libstdc++6:i386 libgtk2.0-0:i386 libpangox-1.0-0:i386 libpangoxft-1.0-0:i386 libidn11:i386 python2.7 python2.7-dev python3-pip openjdk-8-jdk unzip zlib1g-dev zlib1g:i386
+          python3 -m pip install buildozer
 
      - name: Checkout Keystore repo
        uses: actions/checkout@v2
@@ -38,7 +38,7 @@ jobs:
 
           cd ${{ matrix.project }}
           python --version
-          python -m buildozer -v android release 
+          python3 -m buildozer -v android release 
           mv bin/*.apk ../rel/${{ matrix.project }}_armeabi-v7a-release.apk 
 
      - uses: actions/upload-artifact@v1
