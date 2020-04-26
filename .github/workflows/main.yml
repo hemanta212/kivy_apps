@@ -20,17 +20,24 @@ jobs:
           sudo apt update
           sudo apt install build-essential ccache git libncurses5:i386 libstdc++6:i386 libgtk2.0-0:i386 libpangox-1.0-0:i386 libpangoxft-1.0-0:i386 libidn11:i386 python2.7 python2.7-dev openjdk-8-jdk unzip zlib1g-dev zlib1g:i386
 
+     - uses: actions/checkout@v2
+       with:
+         path: 'app'
+
      - name: Checkout Keystore repo
        uses: actions/checkout@v2
        with:
          repository: hemanta212/personal
          token: ${{ secrets.REPO_ACCESS_TOKEN }}
          ref: "refs/tags/vkivyapp"
-         path: 'personal'
+         path: 'app/personal'
 
-     - uses: actions/checkout@v2
+     - name: Checkout Keystore repo
+       uses: actions/checkout@v2
        with:
-         path: 'app'
+         repository: kivy/python-for-android
+         ref: "refs/tags/v2019.07.08"
+         path: 'p4a'
 
      - run: |
           export PATH=$PATH:~/.local/bin/
@@ -39,6 +46,7 @@ jobs:
 
           cd ${{ matrix.project }}
           python --version
+          python -m buildozer android p4a --version
           python -m buildozer -v android release 
           mv bin/*.apk ../rel/${{ matrix.project }}_armeabi-v7a-release.apk 
 
