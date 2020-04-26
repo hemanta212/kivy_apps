@@ -36,7 +36,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python2,kivy,python2legacy
+requirements = python3crystax,kivy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -212,7 +212,7 @@ android.arch = armeabi-v7a
 #p4a.branch = master
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
-#p4a.source_dir = /home/runner/work/kivy_apps/kivy_apps/p4a/
+p4a.source_dir = /home/runner/work/kivy_apps/kivy_apps/p4a/
 
 # (str) The directory in which python-for-android should look for your own build recipes (if any)
 #p4a.local_recipes =
