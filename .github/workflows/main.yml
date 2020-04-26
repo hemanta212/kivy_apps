@@ -12,7 +12,7 @@ jobs:
 
    steps:
      - run: |
-          pip install buildozer==0.36
+          pip install sh buildozer==0.36
           sudo apt-get update
           sudo pip install --upgrade cython==0.28.6
           sudo dpkg --add-architecture i386
