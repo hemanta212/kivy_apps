@@ -97,7 +97,7 @@ android.minapi = 19
 #android.sdk = 20
 
 # (str) Android NDK version to use
-#android.ndk = 17c
+#android.ndk = 10.3.2
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 #android.ndk_api = 21
@@ -106,7 +106,7 @@ android.minapi = 19
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-#android.ndk_path =
+android.ndk_path = /opt/crystax-ndk-10.3.2
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
 #android.sdk_path =
