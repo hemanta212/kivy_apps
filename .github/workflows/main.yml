@@ -46,6 +46,7 @@ jobs:
           cd ${{ matrix.project }}
           python --version
           python -m buildozer android p4a --version
+          python -m buildozer android p4a recipes
           python -m buildozer -v android release 
           mv bin/*.apk ../rel/${{ matrix.project }}_armeabi-v7a-release.apk 
 
