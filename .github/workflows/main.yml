@@ -14,8 +14,8 @@ jobs:
      - name: Checkout Python-for-android repo
        uses: actions/checkout@v2
        with:
-         repository: kivy/python-for-android
-         ref: "c997016d9802384a"
+         repository: kivy/buildozer
+         ref: "36ea4ba26"
          path: 'buildozer'
 
 
@@ -23,6 +23,7 @@ jobs:
           cd buildozer
           python setup.py build
           pip install -e .
+          cd ../
           sudo apt-get update
           sudo pip install --upgrade cython==0.28.6
           sudo dpkg --add-architecture i386
