@@ -23,19 +23,11 @@ jobs:
        with:
          path: 'app'
 
-     - name: Checkout Keystore repo
-       uses: actions/checkout@v2
-       with:
-         repository: hemanta212/personal
-         token: ${{ secrets.REPO_ACCESS_TOKEN }}
-         ref: "refs/tags/vkivyapp"
-         path: 'app/personal'
-
-     - name: Checkout Keystore repo
+     - name: Checkout Python-for-android repo
        uses: actions/checkout@v2
        with:
          repository: kivy/python-for-android
-         ref: "refs/tags/v0.7.0"
+         ref: "refs/tags/0.7.0"
          path: 'p4a'
 
      - run: |
