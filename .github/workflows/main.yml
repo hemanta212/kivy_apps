@@ -37,8 +37,8 @@ jobs:
           mkdir rel
 
           cd ${{ matrix.project }}
-          sudo python --version
-          sudo python -m buildozer -v android release 
+          python --version
+          python -m buildozer -v android release 
           mv bin/*.apk ../rel/${{ matrix.project }}_armeabi-v7a-release.apk 
 
      - uses: actions/upload-artifact@v1
