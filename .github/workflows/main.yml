@@ -2,101 +2,56 @@ name: Build
 on:
   push:
 
-
 jobs:
-  setup:
-   runs-on: ubuntu-latest
-   strategy:
-     matrix:
-       project: ['hello_world', 'http_requester', 'pong', 'whatsapp_ui', 'kitchen_sink']
-
-   steps:
-     - run: |
-          sudo apt-get update
-          sudo apt install -y tree git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev
-          pip3 install --user --upgrade pip setuptools
-          pip3 install --user cython virtualenv
-          pip3 install --user --upgrade buildozer 
-
-     - name: Checkout Keystore repo
-       uses: actions/checkout@v2
-       with:
-         repository: hemanta212/personal
-         token: ${{ secrets.REPO_ACCESS_TOKEN }}
-         ref: "refs/tags/vkivyapp"
-         path: 'personal'
-
-     - uses: actions/checkout@v2
-       with:
-         path: 'app'
-
-     - run: |
-          export PATH=$PATH:~/.local/bin/
-          cd app
-          mkdir rel
-
-          cd ${{ matrix.project }}
-          source ../../personal/credentials/keystores/.env
-          export P4A_RELEASE_KEYSTORE=`readlink -f ../../personal/credentials/keystores/kivyapplicationkey.keystore`
-          export P4A_RELEASE_KEYSTORE_PASSWD=$KEYSTORE_PASS
-          export P4A_RELEASE_KEYALIAS_PASSWD=$KEYSTORE_PASS
-          export P4A_RELEASE_KEYALIAS=kivykey
-
-          buildozer -v android release 
-          mv bin/*.apk ../rel/${{ matrix.project }}_armeabi-v7a-release.apk 
-
-     - uses: actions/upload-artifact@v1
-       with:
-         name: ${{ matrix.project }}_armeabi-v7a-release.apk
-         path: app/rel/${{ matrix.project }}_armeabi-v7a-release.apk
-
-  release:
-    needs: setup
+  # Build job. Builds every demo app for Android with Buildozer
+  build-android:
+    name: Build Android [${{ matrix.demo-name }}]
+    strategy:
+      fail-fast: false
+      matrix:
+        demo-name: [kitchen_sink]
     runs-on: ubuntu-latest
+    env:
+      PYTHONUNBUFFERED: 1
+
     steps:
-     - uses: actions/checkout@v2
-       with:
-         path: 'app'
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: test_sample
 
-     - run: |
-         cd app
-         mkdir rel/
+  - name: Checkout Keystore repo
+    uses: actions/checkout@v2
+    with:
+      repository: hemanta212/personal
+      token: ${{ secrets.REPO_ACCESS_TOKEN }}
+      ref: "refs/tags/vkivyapp"
+      path: 'personal'
 
-     - uses: actions/download-artifact@v1
-       with:
-         name: hello_world_armeabi-v7a-release.apk
-         path: rel/
+  - uses: actions/checkout@v2
+    with:
+      path: 'app'
 
-     - uses: actions/download-artifact@v1
-       with:
-         name: pong_armeabi-v7a-release.apk
-         path: rel/
+  - run: |
+      cd test_sample
+      mkdir rel
 
-     - uses: actions/download-artifact@v1
-       with:
-         name: http_requester_armeabi-v7a-release.apk
-         path: rel/
+      cd ${{ matrix.demo-name }}
+      source ../../personal/credentials/keystores/.env
+      export P4A_RELEASE_KEYSTORE=`readlink -f ../../personal/credentials/keystores/kivyapplicationkey.keystore`
+      export P4A_RELEASE_KEYSTORE_PASSWD=$KEYSTORE_PASS
+      export P4A_RELEASE_KEYALIAS_PASSWD=$KEYSTORE_PASS
+      export P4A_RELEASE_KEYALIAS=kivykey
 
-     - uses: actions/download-artifact@v1
-       with:
-         name: whatsapp_ui_armeabi-v7a-release.apk
-         path: rel/
 
-     - uses: actions/download-artifact@v1
-       with:
-         name: kitchen_sink_armeabi-v7a-release.apk
-         path: rel/
-         
-     - name: Release
-       uses: softprops/action-gh-release@v1
-       if: startsWith(github.ref, 'refs/tags/')
-       with:
-         files: |
-             rel/whatsapp_ui_armeabi-v7a-release.apk
-             rel/pong_armeabi-v7a-release.apk
-             rel/http_requester_armeabi-v7a-release.apk
-             rel/hello_world_armeabi-v7a-release.apk
-             rel/kitchen_sink_armeabi-v7a-release.apk
-         body_path: app/CHANGELOG.txt
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build with Buildozer
+      uses: ArtemSBulgakov/buildozer-action@v1
+      id: buildozer
+      with:
+        repository_root: test_sample
+        workdir: ${{ matrix.demo-name }}
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: ${{ matrix.project }}_armeabi-v7a-release.apk
+        path: ${{ steps.buildozer.outputs.filename }}
