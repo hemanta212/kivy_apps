@@ -7,11 +7,11 @@ jobs:
   build-android:
    name: Build Android [${{ matrix.demo-name }}]
    strategy:
-    fail-fast: false
-    matrix:
-       demo-name: [kitchen_sink]
-    runs-on: ubuntu-latest
-    env:
+      fail-fast: false
+      matrix:
+        demo-name: [kitchen_sink]
+   runs-on: ubuntu-latest
+   env:
       PYTHONUNBUFFERED: 1
 
    steps:
