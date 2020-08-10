@@ -14,25 +14,25 @@ jobs:
     env:
       PYTHONUNBUFFERED: 1
 
-    steps:
+   steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
         path: test_sample
 
-  - name: Checkout Keystore repo
-    uses: actions/checkout@v2
-    with:
-      repository: hemanta212/personal
-      token: ${{ secrets.REPO_ACCESS_TOKEN }}
-      ref: "refs/tags/vkivyapp"
-      path: 'personal'
+    - name: Checkout Keystore repo
+      uses: actions/checkout@v2
+      with:
+        repository: hemanta212/personal
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        ref: "refs/tags/vkivyapp"
+        path: 'personal'
 
-  - uses: actions/checkout@v2
-    with:
-      path: 'app'
+    - uses: actions/checkout@v2
+      with:
+        path: 'app'
 
-  - run: |
+    - run: |
       cd test_sample
       mkdir rel
 
